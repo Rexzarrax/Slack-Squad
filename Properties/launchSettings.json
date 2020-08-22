@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Slack Squad": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}
