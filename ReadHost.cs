@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Principal;
 using System.Text;
 using System.Windows.Forms;
 
@@ -8,6 +9,7 @@ namespace Slack_Squad
     class ReadHost
     {
         private string Hostname = "";
+        private string Token = "";
 
         public ReadHost()
         {
@@ -18,6 +20,7 @@ namespace Slack_Squad
                 string[] lines = System.IO.File.ReadAllLines(@"./host.txt");
 
                 Hostname = lines[0];
+                Token = lines[1];
             }
             catch(Exception e)
             {
@@ -25,9 +28,13 @@ namespace Slack_Squad
                 Application.Exit();
             }
         }
-        public string Get()
+        public string HostnameGet()
         {
             return Hostname;
+        }
+        public string TokenGet()
+        {
+            return Token;
         }
 
     }

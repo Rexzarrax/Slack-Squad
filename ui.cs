@@ -11,11 +11,13 @@ namespace Slack_Squad
     public partial class ui : Form
     {
         public string Host;
+        public string Token;
         public ui()
         {
             InitializeComponent();
             ReadHost RH = new ReadHost();
-            Host = RH.Get();
+            Host = RH.HostnameGet();
+            Token = RH.TokenGet();
             string cs = @"server=" + Host + ";userid=NS_USER;password=;database=notification_squad";
             sql_access sql = new sql_access(cs);
 
@@ -40,7 +42,7 @@ namespace Slack_Squad
                 jsonstring = json.builder(sql.slack_status_list, ref status_text);
 
                 httprequest request = new httprequest();
-                await request.sendAsync(jsonstring);
+                await request.sendAsync(jsonstring,Token);
 
             }
 

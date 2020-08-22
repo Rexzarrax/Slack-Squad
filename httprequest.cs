@@ -13,7 +13,7 @@ namespace Slack_Squad
 
         }
 
-        public async System.Threading.Tasks.Task sendAsync(string json)
+        public async System.Threading.Tasks.Task sendAsync(string json, string token)
         {
             try
             {
@@ -21,8 +21,9 @@ namespace Slack_Squad
                 {
                     using (var request = new HttpRequestMessage(new HttpMethod("POST"), "https://slack.com/api/users.profile.set"))
                     {
-                        request.Headers.TryAddWithoutValidation("Authorization", "Bearer xoxp-137162627015-359168817941-1308259865542-20c35a7a191f44cbdde7428265bc6b5d");
-
+                        string value = "Bearer " + token;
+                        
+                        request.Headers.TryAddWithoutValidation("Authorization", value);
                         request.Content = new StringContent(json);
                         request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
 
