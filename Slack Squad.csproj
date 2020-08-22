@@ -5,6 +5,13 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Slack_Squad</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
+    <Authors>Jards</Authors>
+    <Company>JardsIT</Company>
+    <PackageId>Slack-Squad</PackageId>
+    <Description>A app designed to set the status of slack users with simple button presses.</Description>
+    <Copyright />
+    <PackageReleaseNotes>First Release</PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/Rexzarrax/Slack-Squad</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

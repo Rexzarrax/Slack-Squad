@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Slack_Squad
 {
@@ -12,9 +13,17 @@ namespace Slack_Squad
         {
             // Read each line of the file into a string array. Each element
             // of the array is one line of the file.
-            string[] lines = System.IO.File.ReadAllLines(@"./host.txt");
+            try
+            {
+                string[] lines = System.IO.File.ReadAllLines(@"./host.txt");
 
-            Hostname = lines[0];
+                Hostname = lines[0];
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message.ToString(), "Error");
+                Application.Exit();
+            }
         }
         public string Get()
         {
