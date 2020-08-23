@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Text;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Windows.Forms;
@@ -12,6 +13,7 @@ namespace Slack_Squad
     {
         public string Host;
         public string Token;
+        public bool processing;
         public ui()
         {
             InitializeComponent();
@@ -28,6 +30,8 @@ namespace Slack_Squad
 
             sql.GetStatusAll();
 
+            processing = false;
+
             if (sql.slack_status_list.Count == 0)
             {
                 MessageBox.Show("No Status Found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -36,14 +40,25 @@ namespace Slack_Squad
 
             async void newButton_Click(object sender, EventArgs e)
             {
-                string jsonstring;
                 Button btnSender = (Button)sender;
-                string status_text = btnSender.Text;
-                jsonstring = json.builder(sql.slack_status_list, ref status_text);
 
-                httprequest request = new httprequest();
-                await request.sendAsync(jsonstring,Token);
+                if (!processing)
+                {
+                    processing = true;
+                    string status_text = btnSender.Text;
+                    string jsonstring = json.builder(sql.slack_status_list, ref status_text);
 
+                    btnSender.Text = "Working...";
+
+                    httprequest request = new httprequest();
+                    await request.sendAsync(jsonstring, Token);
+                    btnSender.Text = status_text;
+                    processing = false;
+                }
+                else
+                {
+                    MessageBox.Show("Still Processing previous request", "Warning");
+                }
             }
 
             int LoadButtons()
