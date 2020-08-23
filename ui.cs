@@ -20,7 +20,7 @@ namespace Slack_Squad
             ReadHost RH = new ReadHost();
             Host = RH.HostnameGet();
             Token = RH.TokenGet();
-            string cs = @"server=" + Host + ";userid=NS_USER;password=;database=notification_squad";
+            string cs = @"server=" + Host + ";userid=SS_USER;password=Powder-Soldier-Witness-Produce-7;database=notification_squad";
             sql_access sql = new sql_access(cs);
 
 
